@@ -1,0 +1,57 @@
+User Tap Like Button
+        │
+        ▼
+Frontend
+handleLike(postId)
+        │
+        ▼
+POST / PATCH Like API
+        │
+        ▼
+Backend Auth Middleware
+        │
+        ▼
+Get Current User Id
+(req.user)
+        │
+        ▼
+Check Like Collection
+{
+   postId,
+   userId
+}
+        │
+        ┌─────────────────────────────┐
+        │                             │
+        ▼                             ▼
+Like Exists?                     Like Not Exists?
+        │                             │
+      YES                            NO
+        │                             │
+Delete Like Document           Create Like Document
+        │                             │
+Post.likeCount--               Post.likeCount++
+        │                             │
+liked = false                  liked = true
+        │                             │
+        └──────────────┬──────────────┘
+                       │
+                       ▼
+Return Response
+{
+   success: true,
+   liked,
+   likeCount
+}
+        │
+        ▼
+Frontend Receive Response
+        │
+        ▼
+Update Only That Post
+liked
+likeCount
+        │
+        ▼
+UI Updated
+❤️ / 🤍
